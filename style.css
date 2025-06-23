@@ -1,0 +1,101 @@
+/* Genel Gövde Ayarları */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Başlık */
+  h1 {
+    color: #0055aa;
+    font-size: 36px;
+    margin: 0;
+    padding: 10px;
+  }
+  
+  h2 {
+    color: #0055aa;
+    font-size: 28px;
+    margin-top: 30px;
+  }
+  
+  p {
+    font-size: 18px;
+  }
+  
+  /* Üst Menü (Header) */
+  header {
+    background-color: #0055aa;
+    color: white;
+    padding: 20px 10px;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 15px;
+  }
+  
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  nav ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Giriş Bölümü (index.html) */
+  .giris {
+    margin-top: 50px;
+  }
+  
+  /* Duyurular ve Etkinlikler Kartları */
+  .duyuru-kutu,
+  .etkinlik-kart {
+    background-color: #f1f1f1;
+    border-left: 5px solid #0055aa;
+    padding: 15px;
+    margin: 20px auto;
+    max-width: 700px;
+    border-radius: 5px;
+    text-align: left;
+  }
+  
+  /* Kulüpler Listesi */
+  .kulup-listesi ul {
+    list-style-type: disc;
+    text-align: left;
+    max-width: 700px;
+    margin: 30px auto;
+    padding-left: 30px;
+  }
+  
+  .kulup-listesi h2 {
+    color: #0055aa;
+  }
+  
+  .kulup-listesi li {
+    margin-bottom: 12px;
+  }
+  
+  /* Galeri Sayfası */
+  section img {
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+  }
+  
+  section img:hover {
+    transform: scale(1.05);
+  }
+  
