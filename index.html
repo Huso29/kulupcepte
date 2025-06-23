@@ -22,5 +22,26 @@
     <h2>Üniversite Kulüplerine Özel Platform</h2>
     <p>Tüm kulüp duyuruları, etkinlikler ve iletişim tek bir platformda birleşti!</p>
   </section>
+
+  <section class="form-bolumu">
+    <h2>Kulüp Başvuru Formu</h2>
+    <form id="kulupFormu">
+      <input type="text" name="adSoyad" placeholder="Ad Soyad" required><br><br>
+
+      <select name="kulupSecimi" required>
+        <option value="">Kulüp Seçin</option>
+        <option value="Bilişim Kulübü">Bilişim Kulübü</option>
+        <option value="Tarih Kulübü">Tarih Kulübü</option>
+        <option value="Müzik Kulübü">Müzik Kulübü</option>
+        <option value="Girişimcilik Kulübü">Girişimcilik Kulübü</option>
+      </select><br><br>
+
+      <textarea name="mesaj" rows="4" placeholder="Kendinizden bahsedin..." required></textarea><br><br>
+
+      <button type="submit">Başvur</button>
+    </form>
+    <p id="onayMesaji" style="display:none; color: green;">Başvurunuz alındı!</p>
+  </section>
 </body>
 </html>
+

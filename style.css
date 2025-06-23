@@ -97,5 +97,32 @@ body {
   
   section img:hover {
     transform: scale(1.05);
+  }/* Başvuru Formu */
+.form-bolumu {
+    margin-top: 40px;
   }
+  
+  form input,
+  form select,
+  form textarea {
+    padding: 10px;
+    width: 300px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+  
+  form button {
+    background-color: #0055aa;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  form button:hover {
+    background-color: #003f88;
+  }
+  
   
