@@ -44,24 +44,24 @@
   </section>
 
   <!-- Firebase SDK (modüler versiyon) -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script>
+  <script type="module">
+    // Firebase modüler SDK'yı import et
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
-  <script>
-    // Firebase config ayarlarını al
+    // Firebase yapılandırma bilgilerini ekle
     const firebaseConfig = {
-      apiKey: "AIzaSyDPZ3IekUn52kvoipeLciROYjxJPpvH22I",
-      authDomain: "kulupcepte.firebaseapp.com",
-      projectId: "kulupcepte",
-      storageBucket: "kulupcepte.appspot.com",
-      messagingSenderId: "928107390704",
-      appId: "1:928107390704:web:f8296d59a3ba4348d84435",
-      measurementId: "G-WR795YW1H8"
+      apiKey: "AIzaSyA0ixKTH_hQnNbGxzyatvkueHtZ0tCyCYA",
+      authDomain: "kulupcepte-848e1.firebaseapp.com",
+      projectId: "kulupcepte-848e1",
+      storageBucket: "kulupcepte-848e1.firebasestorage.app",
+      messagingSenderId: "744362162117",
+      appId: "1:744362162117:web:d98790a856779c42c1bdac"
     };
 
     // Firebase'i başlat
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();  // Firestore veritabanını başlat
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);  // Firestore veritabanını başlat
 
     // Formu Firebase'e bağla
     const form = document.getElementById("kulupFormu");
@@ -75,15 +75,19 @@
       const mesaj = form.mesaj.value;
 
       try {
-        await db.collection("katilimlar").add({
+        // Firestore'a veri ekle
+        await addDoc(collection(db, "katilimlar"), {
           adSoyad,
           kulupSecimi,
           mesaj,
           tarih: new Date()
         });
 
-        onayMesaji.style.display = "block"; // Başarı mesajı
-        form.reset(); // Formu sıfırla
+        // Başarı mesajı göster
+        onayMesaji.style.display = "block";
+
+        // Formu sıfırla
+        form.reset();
 
       } catch (err) {
         console.error("Hata:", err);
@@ -93,6 +97,7 @@
   </script>
 </body>
 </html>
+
 
 
 
