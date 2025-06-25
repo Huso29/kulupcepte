@@ -42,6 +42,57 @@
     </form>
     <p id="onayMesaji" style="display:none; color: green;">Başvurunuz alındı!</p>
   </section>
+
+  <!-- Firebase SDK (modüler versiyon) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script>
+
+  <script>
+    // Firebase config ayarlarını al
+    const firebaseConfig = {
+      apiKey: "AIzaSyDPZ3IekUn52kvoipeLciROYjxJPpvH22I",
+      authDomain: "kulupcepte.firebaseapp.com",
+      projectId: "kulupcepte",
+      storageBucket: "kulupcepte.appspot.com",
+      messagingSenderId: "928107390704",
+      appId: "1:928107390704:web:f8296d59a3ba4348d84435",
+      measurementId: "G-WR795YW1H8"
+    };
+
+    // Firebase'i başlat
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();  // Firestore veritabanını başlat
+
+    // Formu Firebase'e bağla
+    const form = document.getElementById("kulupFormu");
+    const onayMesaji = document.getElementById("onayMesaji");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();  // Sayfa yenilemesini engelle
+
+      const adSoyad = form.adSoyad.value;
+      const kulupSecimi = form.kulupSecimi.value;
+      const mesaj = form.mesaj.value;
+
+      try {
+        await db.collection("katilimlar").add({
+          adSoyad,
+          kulupSecimi,
+          mesaj,
+          tarih: new Date()
+        });
+
+        onayMesaji.style.display = "block"; // Başarı mesajı
+        form.reset(); // Formu sıfırla
+
+      } catch (err) {
+        console.error("Hata:", err);
+        alert("Bir hata oluştu.");
+      }
+    });
+  </script>
 </body>
 </html>
+
+
 
