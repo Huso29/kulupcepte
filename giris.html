@@ -1,87 +1,53 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>Giriş Yap – Kulüp Cepte</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-auth-compat.js"></script>
+  <meta charset="UTF-8" />
+  <title>Giriş</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    body {
-      font-family: sans-serif;
-      background-color: #f7f7f7;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
     .giris-kutu {
-      background: white;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      text-align: center;
+      background-color: #ffffff;
       max-width: 400px;
+      margin: 100px auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
     .giris-kutu h2 {
       margin-bottom: 20px;
-      color: #2c3e50;
     }
 
-    .giris-kutu button {
-      background-color: #4285F4;
-      color: white;
-      border: none;
-      padding: 12px 20px;
+    .giris-kutu p {
       font-size: 16px;
-      border-radius: 6px;
-      cursor: pointer;
+      color: #666;
+    }
+
+    .giris-kutu a {
+      display: inline-block;
+      margin-top: 20px;
+      background-color: #0055aa;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .giris-kutu a:hover {
+      background-color: #003f88;
     }
   </style>
 </head>
 <body>
 
   <div class="giris-kutu">
-    <h2>Kulüp Cepte Giriş</h2>
-    <p>Üniversite mailinizle veya kulüp yöneticisi olarak giriş yapın</p>
-    <button onclick="signIn()">Google ile Giriş Yap</button>
+    <h2>Hoş Geldiniz</h2>
+    <p>Kulüp Cepte platformuna giriş yapmak için aşağıdan bir panel seçin.</p>
+    
+    <a href="ogrenci_panel.html">Öğrenci Paneli</a>
+    <a href="kulup_panel.html" style="margin-left: 10px;">Kulüp Paneli</a>
   </div>
-
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyA0ixKTH_hQnNbGxzyatvkueHtZ0tCyCYA",
-      authDomain: "kulupcepte-848e1.firebaseapp.com",
-      projectId: "kulupcepte-848e1",
-      storageBucket: "kulupcepte-848e1.firebasestorage.app",
-      messagingSenderId: "744362162117",
-      appId: "1:744362162117:web:d98790a856779c42c1bdac"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-
-    function signIn() {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      auth.signInWithPopup(provider).then(result => {
-        const email = result.user.email;
-        const yoneticiler = ["kulupx@gmail.com", "kulupy@gmail.com"];
-
-        if (yoneticiler.includes(email)) {
-          window.location.href = "kulup_panel.html";
-        } else if (email.endsWith("@edu.tr")) {
-          window.location.href = "ogrenci_panel.html";
-        } else {
-          alert("Bu sistem sadece edu.tr mail adresi veya kulüp yöneticilerine açıktır.");
-          auth.signOut();
-        }
-      }).catch(error => {
-        console.error(error);
-        alert("Giriş başarısız oldu.");
-      });
-    }
-  </script>
 
 </body>
 </html>
