@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Duyuru Ekle - Kulüp Cepte</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .form-container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #0055aa;
+      margin-bottom: 20px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #0055aa;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #003f88;
+    }
+
+    #basariliMesaj {
+      color: green;
+      display: none;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Yeni Duyuru Ekle</h2>
+    <form id="duyuruFormu">
+      <input type="text" name="baslik" placeholder="Duyuru Başlığı" required>
+      <textarea name="icerik" rows="4" placeholder="Duyuru içeriği..." required></textarea>
+      <button type="submit">Duyuruyu Kaydet</button>
+    </form>
+    <p id="basariliMesaj">✅ Duyuru başarıyla eklendi!</p>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA0ixKTH_hQnNbGxzyatvkueHtZ0tCyCYA",
+      authDomain: "kulupcepte-848e1.firebaseapp.com",
+      projectId: "kulupcepte-848e1",
+      storageBucket: "kulupcepte-848e1.appspot.com",
+      messagingSenderId: "744362162117",
+      appId: "1:744362162117:web:d98790a856779c42c1bdac"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const form = document.getElementById("duyuruFormu");
+    const mesaj = document.getElementById("basariliMesaj");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const baslik = form.baslik.value;
+      const icerik = form.icerik.value;
+
+      try {
+        await addDoc(collection(db, "duyurular"), {
+          baslik,
+          icerik,
+          tarih: new Date()
+        });
+        mesaj.style.display = "block";
+        form.reset();
+      } catch (error) {
+        alert("Hata oluştu: " + error.message);
+      }
+    });
+  </script>
+
+</body>
+</html>
