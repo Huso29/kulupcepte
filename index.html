@@ -6,6 +6,22 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Slayt Gösterisi Başlangıcı -->
+  <section class="slider">
+    <div class="slides">
+      <div class="slide fade">
+        <img src="img/kampus1.jpg" alt="Kampüs 1" />
+      </div>
+      <div class="slide fade">
+        <img src="img/kampus2.jpg" alt="Kampüs 2" />
+      </div>
+      <div class="slide fade">
+        <img src="img/kampus3.jpg" alt="Kampüs 3" />
+      </div>
+    </div>
+  </section>
+  <!-- Slayt Gösterisi Bitişi -->
+
   <header>
     <h1>Kulüp Cepte</h1>
     <nav>
@@ -45,11 +61,9 @@
 
   <!-- Firebase SDK (modüler versiyon) -->
   <script type="module">
-    // Firebase modüler SDK'yı import et
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
-    // Firebase yapılandırma bilgilerini ekle
     const firebaseConfig = {
       apiKey: "AIzaSyA0ixKTH_hQnNbGxzyatvkueHtZ0tCyCYA",
       authDomain: "kulupcepte-848e1.firebaseapp.com",
@@ -59,11 +73,9 @@
       appId: "1:744362162117:web:d98790a856779c42c1bdac"
     };
 
-    // Firebase'i başlat
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);  // Firestore veritabanını başlat
 
-    // Formu Firebase'e bağla
     const form = document.getElementById("kulupFormu");
     const onayMesaji = document.getElementById("onayMesaji");
 
@@ -75,7 +87,6 @@
       const mesaj = form.mesaj.value;
 
       try {
-        // Firestore'a veri ekle
         await addDoc(collection(db, "katilimlar"), {
           adSoyad,
           kulupSecimi,
@@ -83,20 +94,60 @@
           tarih: new Date()
         });
 
-        // Başarı mesajı göster
-        onayMesaji.style.display = "block";
-
-        // Formu sıfırla
-        form.reset();
-
+        onayMesaji.style.display = "block"; // Başarı mesajı
+        form.reset(); // Formu sıfırla
       } catch (err) {
         console.error("Hata:", err);
         alert("Bir hata oluştu.");
       }
     });
   </script>
+
+  <!-- Slayt Gösterisi CSS ve Animasyon -->
+  <style>
+    .slider {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+    }
+
+    .slides {
+      display: flex;
+      width: 300%;
+      animation: slide 15s infinite;
+    }
+
+    .slide {
+      width: 100%;
+      transition: transform 0.5s ease;
+    }
+
+    .slide img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    @keyframes slide {
+      0% {
+        transform: translateX(0);
+      }
+      33% {
+        transform: translateX(-100%);
+      }
+      66% {
+        transform: translateX(-200%);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+  </style>
+
 </body>
 </html>
+
 
 
 

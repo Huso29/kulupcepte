@@ -125,4 +125,123 @@ body {
     background-color: #003f88;
   }
   
+  /* Genel Tasarım */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
   
+  header {
+    background-color: #0055aa;
+    color: white;
+    padding: 20px;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 15px;
+  }
+  
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  nav ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Mobil için özel stil */
+  @media (max-width: 768px) {
+    .form-bolumu form {
+      width: 90%;
+    }
+  
+    nav ul {
+      flex-direction: column;
+      gap: 15px;
+    }
+  
+    header {
+      text-align: center;
+    }
+  }
+/* Slayt Stilleri */
+.slider {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+  }
+  
+  .slides {
+    display: flex;
+    width: 300%;
+    animation: slide 15s infinite;
+  }
+  
+  .slide {
+    width: 100%;
+    transition: transform 0.5s ease;
+  }
+  
+  .slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Slayt Animasyonu */
+  @keyframes slide {
+    0% {
+      transform: translateX(0);
+    }
+    33% {
+      transform: translateX(-100%);
+    }
+    66% {
+      transform: translateX(-200%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+/* Buton Hover Efekti */
+form button {
+    background-color: #0055aa;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  form button:hover {
+    background-color: #003f88;
+    transform: scale(1.05);  /* Buton biraz büyür */
+  }
+  
+  /* Başlık Animasyonu */
+  h1, h2 {
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+      
