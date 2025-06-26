@@ -25,12 +25,13 @@
     }
 
     .giris-kutu {
-      background-color: rgba(255, 255, 255, 0.15);
+      background-color: rgba(255, 255, 255, 0.1);
       padding: 40px;
       border-radius: 16px;
       backdrop-filter: blur(10px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
       max-width: 400px;
+      width: 100%;
     }
 
     .giris-kutu h1 {
@@ -45,19 +46,24 @@
       margin-bottom: 30px;
     }
 
-    .giris-kutu a {
-      display: inline-block;
+    .giris-kutu a,
+    .giris-kutu button {
+      display: block;
       background-color: #ffffff;
       color: #0055aa;
       font-weight: bold;
       padding: 12px 24px;
-      margin: 10px;
+      margin: 10px auto;
       text-decoration: none;
       border-radius: 8px;
       transition: background-color 0.3s ease, transform 0.3s ease;
+      width: 80%;
+      border: none;
+      cursor: pointer;
     }
 
-    .giris-kutu a:hover {
+    .giris-kutu a:hover,
+    .giris-kutu button:hover {
       background-color: #e0e0e0;
       transform: scale(1.05);
     }
@@ -65,6 +71,20 @@
     .logo {
       max-width: 100px;
       margin-bottom: 20px;
+    }
+
+    input[type="email"] {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      width: 80%;
+      margin-bottom: 10px;
+    }
+
+    #hata {
+      color: yellow;
+      font-size: 14px;
+      display: none;
     }
   </style>
 </head>
@@ -74,10 +94,33 @@
       <img src="img/logo.png" alt="Kulüp Cepte" class="logo" />
       <h1>Kulüp Cepte</h1>
       <p>Üniversite kulüplerini tek çatı altında toplayan dijital platforma hoş geldiniz.</p>
-      <a href="ogrenci_panel.html">👩‍🎓  Öğrenci Girişi</a>
-      <a href="kulup_panel.html">🎓  Kulüp Yönetimi</a>
+
+      <!-- E-Posta Doğrulama Formu -->
+      <form id="epostaForm">
+        <input type="email" id="eposta" placeholder="Üniversite e-postanız (ogr.edu.tr)" required />
+        <button type="submit">👩‍🎓 Öğrenci Girişi</button>
+        <p id="hata">Lütfen geçerli bir üniversite e-postası girin (örneğin: ad.soyad@ogr.edu.tr)</p>
+      </form>
+
+      <!-- Kulüp Yönetimi Girişi -->
+      <a href="kulup_panel.html">🎓 Kulüp Yönetimi</a>
     </div>
   </div>
+
+  <script>
+    document.getElementById("epostaForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const eposta = document.getElementById("eposta").value.trim();
+      const hata = document.getElementById("hata");
+
+      if (eposta.endsWith("@ogr.edu.tr")) {
+        window.location.href = "ogrenci_panel.html";
+      } else {
+        hata.style.display = "block";
+      }
+    });
+  </script>
 </body>
 </html>
+
 
