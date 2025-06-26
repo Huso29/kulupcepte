@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Başvurular - Kulüp Cepte</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .basvuru-container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #0055aa;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .basvuru-kutu {
+      border-left: 5px solid #0055aa;
+      background-color: #f1f1f1;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+    }
+
+    .basvuru-kutu p {
+      margin: 4px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="basvuru-container">
+    <h2>Kulüp Başvuruları</h2>
+    <div id="basvuruListesi">
+      <p>Yükleniyor...</p>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA0ixKTH_hQnNbGxzyatvkueHtZ0tCyCYA",
+      authDomain: "kulupcepte-848e1.firebaseapp.com",
+      projectId: "kulupcepte-848e1",
+      storageBucket: "kulupcepte-848e1.appspot.com",
+      messagingSenderId: "744362162117",
+      appId: "1:744362162117:web:d98790a856779c42c1bdac"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const liste = document.getElementById("basvuruListesi");
+
+    async function getirBasvurular() {
+      try {
+        const querySnapshot = await getDocs(collection(db, "katilimlar"));
+        liste.innerHTML = ""; // içeriği temizle
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          const kutu = document.createElement("div");
+          kutu.classList.add("basvuru-kutu");
+          kutu.innerHTML = `
+            <p><strong>Ad Soyad:</strong> ${data.adSoyad}</p>
+            <p><strong>Kulüp:</strong> ${data.kulupSecimi}</p>
+            <p><strong>Mesaj:</strong> ${data.mesaj}</p>
+          `;
+          liste.appendChild(kutu);
+        });
+
+        if (querySnapshot.empty) {
+          liste.innerHTML = "<p>Henüz başvuru yok.</p>";
+        }
+      } catch (err) {
+        liste.innerHTML = `<p style="color:red;">Hata oluştu: ${err.message}</p>`;
+      }
+    }
+
+    getirBasvurular();
+  </script>
+
+</body>
+</html>
