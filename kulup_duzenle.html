@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Kulüp Sayfasını Düzenle</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .duzenle-container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #0055aa;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #0055aa;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #003f88;
+    }
+
+    #mesaj {
+      text-align: center;
+      color: green;
+      display: none;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="duzenle-container">
+    <h2>Kulüp Sayfasını Düzenle</h2>
+    <form id="kulupForm">
+      <input type="text" name="ad" placeholder="Kulüp Adı" required>
+      <textarea name="aciklama" rows="4" placeholder="Kulüp açıklaması..." required></textarea>
+      <input type="text" name="gorsel" placeholder="Görsel URL" required>
+      <button type="submit">Kaydet</button>
+    </form>
+    <p id="mesaj">✅ Kulüp bilgileri güncellendi!</p>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA0ixKTH_hQnNbGxzyatvkueHtZ0tCyCYA",
+      authDomain: "kulupcepte-848e1.firebaseapp.com",
+      projectId: "kulupcepte-848e1",
+      storageBucket: "kulupcepte-848e1.appspot.com",
+      messagingSenderId: "744362162117",
+      appId: "1:744362162117:web:d98790a856779c42c1bdac"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const form = document.getElementById("kulupForm");
+    const mesaj = document.getElementById("mesaj");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const ad = form.ad.value.trim();
+      const aciklama = form.aciklama.value.trim();
+      const gorsel = form.gorsel.value.trim();
+
+      if (!ad || !aciklama || !gorsel) {
+        alert("Lütfen tüm alanları doldurun.");
+        return;
+      }
+
+      try {
+        await setDoc(doc(db, "kulupler", ad), {
+          ad,
+          aciklama,
+          gorsel
+        });
+
+        mesaj.style.display = "block";
+        form.reset();
+      } catch (error) {
+        alert("Hata oluştu: " + error.message);
+      }
+    });
+  </script>
+
+</body>
+</html>
