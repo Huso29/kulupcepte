@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Öğrenci Paneli</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f0f0f0;
+      padding: 30px;
+    }
+
+    h1 {
+      color: #34495e;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .kulup-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .kulup-karti {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .kulup-karti img {
+      width: 100%;
+      border-radius: 8px;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .kulup-karti h3 {
+      margin: 15px 0 10px;
+    }
+
+    .kulup-karti p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .kulup-karti button {
+      margin-top: 10px;
+      background-color: #3498db;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Üniversite Kulüpleri</h1>
+
+  <div class="kulup-grid">
+    <!-- Kulüp Kartları -->
+    <div class="kulup-karti">
+      <img src="img/kulup-bilisim.jpg" alt="Bilişim Kulübü" />
+      <h3>Bilişim Kulübü</h3>
+      <p>Yazılım, donanım, yapay zeka ve daha fazlası bu kulüpte!</p>
+      <button onclick="basvur('Bilişim Kulübü')">Başvur</button>
+    </div>
+
+    <div class="kulup-karti">
+      <img src="img/kulup-tarih.jpg" alt="Tarih Kulübü" />
+      <h3>Tarih Kulübü</h3>
+      <p>Tarihe meraklıysan, araştırma gezileri ve sunumlarla dolu bu kulüp seni bekliyor!</p>
+      <button onclick="basvur('Tarih Kulübü')">Başvur</button>
+    </div>
+
+    <div class="kulup-karti">
+      <img src="img/kulup-muzik.jpg" alt="Müzik Kulübü" />
+      <h3>Müzik Kulübü</h3>
+      <p>Enstrüman çal, sahneye çık, birlikte müzik yapalım!</p>
+      <button onclick="basvur('Müzik Kulübü')">Başvur</button>
+    </div>
+
+    <div class="kulup-karti">
+      <img src="img/kulup-girisim.jpg" alt="Girişimcilik Kulübü" />
+      <h3>Girişimcilik Kulübü</h3>
+      <p>Fikirlerini startup’a dönüştürmek için harika bir topluluk!</p>
+      <button onclick="basvur('Girişimcilik Kulübü')">Başvur</button>
+    </div>
+  </div>
+
+  <!-- Firebase + Firestore -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA0ixKTH_hQnNbGxzyatvkueHtZ0tCyCYA",
+      authDomain: "kulupcepte-848e1.firebaseapp.com",
+      projectId: "kulupcepte-848e1",
+      storageBucket: "kulupcepte-848e1.firebasestorage.app",
+      messagingSenderId: "744362162117",
+      appId: "1:744362162117:web:d98790a856779c42c1bdac"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function basvur(kulupAdi) {
+      const adSoyad = prompt(`Lütfen adınızı ve soyadınızı girin:\n(${kulupAdi} için başvuru yapılıyor)`);
+
+      if (!adSoyad) return;
+
+      try {
+        await addDoc(collection(db, "katilimlar"), {
+          adSoyad,
+          kulupSecimi: kulupAdi,
+          mesaj: "Hızlı başvuru",
+          tarih: new Date()
+        });
+        alert("Başvurunuz kaydedildi 🎉");
+      } catch (error) {
+        alert("Başvuru sırasında hata oluştu.");
+        console.error(error);
+      }
+    }
+  </script>
+
+</body>
+</html>

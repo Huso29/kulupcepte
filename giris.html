@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Giriş Yap – Kulüp Cepte</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-auth-compat.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f7f7f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .giris-kutu {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 400px;
+    }
+
+    .giris-kutu h2 {
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+
+    .giris-kutu button {
+      background-color: #4285F4;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="giris-kutu">
+    <h2>Kulüp Cepte Giriş</h2>
+    <p>Üniversite mailinizle veya kulüp yöneticisi olarak giriş yapın</p>
+    <button onclick="signIn()">Google ile Giriş Yap</button>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyA0ixKTH_hQnNbGxzyatvkueHtZ0tCyCYA",
+      authDomain: "kulupcepte-848e1.firebaseapp.com",
+      projectId: "kulupcepte-848e1",
+      storageBucket: "kulupcepte-848e1.firebasestorage.app",
+      messagingSenderId: "744362162117",
+      appId: "1:744362162117:web:d98790a856779c42c1bdac"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    function signIn() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider).then(result => {
+        const email = result.user.email;
+        const yoneticiler = ["kulupx@gmail.com", "kulupy@gmail.com"];
+
+        if (yoneticiler.includes(email)) {
+          window.location.href = "kulup_panel.html";
+        } else if (email.endsWith("@edu.tr")) {
+          window.location.href = "ogrenci_panel.html";
+        } else {
+          alert("Bu sistem sadece edu.tr mail adresi veya kulüp yöneticilerine açıktır.");
+          auth.signOut();
+        }
+      }).catch(error => {
+        console.error(error);
+        alert("Giriş başarısız oldu.");
+      });
+    }
+  </script>
+
+</body>
+</html>

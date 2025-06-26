@@ -4,23 +4,20 @@
   <meta charset="UTF-8" />
   <title>Kulüp Cepte</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Firebase Auth için gerekli scriptler -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-auth-compat.js"></script>
 </head>
 <body>
-  <!-- Slayt Gösterisi Başlangıcı -->
+
+  <!-- Slayt Gösterisi -->
   <section class="slider">
     <div class="slides">
-      <div class="slide fade">
-        <img src="img/kampus1.jpg" alt="Kampüs 1" />
-      </div>
-      <div class="slide fade">
-        <img src="img/kampus2.jpg" alt="Kampüs 2" />
-      </div>
-      <div class="slide fade">
-        <img src="img/kampus3.jpg" alt="Kampüs 3" />
-      </div>
+      <div class="slide fade"><img src="img/kampus1.jpg" alt="Kampüs 1" /></div>
+      <div class="slide fade"><img src="img/kampus2.jpg" alt="Kampüs 2" /></div>
+      <div class="slide fade"><img src="img/kampus3.jpg" alt="Kampüs 3" /></div>
     </div>
   </section>
-  <!-- Slayt Gösterisi Bitişi -->
 
   <header>
     <h1>Kulüp Cepte</h1>
@@ -34,16 +31,18 @@
     </nav>
   </header>
 
+  <!-- Giriş Butonu -->
   <section class="giris">
     <h2>Üniversite Kulüplerine Özel Platform</h2>
     <p>Tüm kulüp duyuruları, etkinlikler ve iletişim tek bir platformda birleşti!</p>
+    <button onclick="signIn()">Google ile Giriş Yap</button>
   </section>
 
+  <!-- Kulüp Başvuru Formu -->
   <section class="form-bolumu">
     <h2>Kulüp Başvuru Formu</h2>
     <form id="kulupFormu">
       <input type="text" name="adSoyad" placeholder="Ad Soyad" required><br><br>
-
       <select name="kulupSecimi" required>
         <option value="">Kulüp Seçin</option>
         <option value="Bilişim Kulübü">Bilişim Kulübü</option>
@@ -51,19 +50,14 @@
         <option value="Müzik Kulübü">Müzik Kulübü</option>
         <option value="Girişimcilik Kulübü">Girişimcilik Kulübü</option>
       </select><br><br>
-
       <textarea name="mesaj" rows="4" placeholder="Kendinizden bahsedin..." required></textarea><br><br>
-
       <button type="submit">Başvur</button>
     </form>
     <p id="onayMesaji" style="display:none; color: green;">Başvurunuz alındı!</p>
   </section>
 
-  <!-- Firebase SDK (modüler versiyon) -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
-
+  <!-- Firebase Login + Firestore -->
+  <script>
     const firebaseConfig = {
       apiKey: "AIzaSyA0ixKTH_hQnNbGxzyatvkueHtZ0tCyCYA",
       authDomain: "kulupcepte-848e1.firebaseapp.com",
@@ -73,15 +67,43 @@
       appId: "1:744362162117:web:d98790a856779c42c1bdac"
     };
 
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    function signIn() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider).then(result => {
+        const email = result.user.email;
+        const yoneticiler = ["kulupx@gmail.com", "kulupy@gmail.com"];
+
+        if (yoneticiler.includes(email)) {
+          window.location.href = "kulup_panel.html";
+        } else if (email.endsWith("@edu.tr")) {
+          window.location.href = "ogrenci_panel.html";
+        } else {
+          alert("Sadece edu.tr uzantılı mail adresi veya tanımlı kulüp yöneticileri giriş yapabilir.");
+          auth.signOut();
+        }
+      }).catch(error => {
+        console.error(error);
+        alert("Giriş başarısız oldu.");
+      });
+    }
+  </script>
+
+  <!-- Firestore form gönderimi (modüler) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
     const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);  // Firestore veritabanını başlat
+    const db = getFirestore(app);
 
     const form = document.getElementById("kulupFormu");
     const onayMesaji = document.getElementById("onayMesaji");
 
     form.addEventListener("submit", async (e) => {
-      e.preventDefault();  // Sayfa yenilemesini engelle
-
+      e.preventDefault();
       const adSoyad = form.adSoyad.value;
       const kulupSecimi = form.kulupSecimi.value;
       const mesaj = form.mesaj.value;
@@ -93,9 +115,8 @@
           mesaj,
           tarih: new Date()
         });
-
-        onayMesaji.style.display = "block"; // Başarı mesajı
-        form.reset(); // Formu sıfırla
+        onayMesaji.style.display = "block";
+        form.reset();
       } catch (err) {
         console.error("Hata:", err);
         alert("Bir hata oluştu.");
@@ -103,50 +124,22 @@
     });
   </script>
 
-  <!-- Slayt Gösterisi CSS ve Animasyon -->
+  <!-- Slayt CSS -->
   <style>
-    .slider {
-      position: relative;
-      width: 100%;
-      height: 300px;
-      overflow: hidden;
-    }
-
-    .slides {
-      display: flex;
-      width: 300%;
-      animation: slide 15s infinite;
-    }
-
-    .slide {
-      width: 100%;
-      transition: transform 0.5s ease;
-    }
-
-    .slide img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
+    .slider { position: relative; width: 100%; height: 300px; overflow: hidden; }
+    .slides { display: flex; width: 300%; animation: slide 15s infinite; }
+    .slide { width: 100%; transition: transform 0.5s ease; }
+    .slide img { width: 100%; height: auto; display: block; }
     @keyframes slide {
-      0% {
-        transform: translateX(0);
-      }
-      33% {
-        transform: translateX(-100%);
-      }
-      66% {
-        transform: translateX(-200%);
-      }
-      100% {
-        transform: translateX(0);
-      }
+      0% { transform: translateX(0); }
+      33% { transform: translateX(-100%); }
+      66% { transform: translateX(-200%); }
+      100% { transform: translateX(0); }
     }
   </style>
-
 </body>
 </html>
+
 
 
 

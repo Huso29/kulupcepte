@@ -4,8 +4,62 @@
   <meta charset="UTF-8" />
   <title>Kulüpler</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 30px;
+      background: #f4f4f4;
+    }
+
+    header h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #3498db;
+      font-weight: bold;
+    }
+
+    .kulup-listesi {
+      margin-top: 40px;
+    }
+
+    .kulup-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .kulup-kart {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .kulup-kart h3 {
+      margin-bottom: 10px;
+      color: #34495e;
+    }
+
+    .kulup-kart p {
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
+
   <header>
     <h1>Üniversite Kulüpleri</h1>
     <nav>
@@ -19,29 +73,90 @@
   </header>
 
   <section class="kulup-listesi">
-    <h2>Kulüpler Listesi</h2>
-    <ul>
-      <li><strong>Bilişim Kulübü:</strong> Yazılım, web geliştirme ve yapay zekâ çalışmaları.</li>
-      <li><strong>Tarih Kulübü:</strong> Kültürel geziler ve tarih üzerine seminerler.</li>
-      <li><strong>Müzik Kulübü:</strong> Konserler, prova çalışmaları ve grup müzik etkinlikleri.</li>
-      <li><strong>Tiyatro Kulübü:</strong> Oyun hazırlıkları ve sahne performansları.</li>
-      <li><strong>Sinema Kulübü:</strong> Film gösterimleri ve yönetmen analizleri.</li>
-      <li><strong>Fotoğrafçılık Kulübü:</strong> Kampüs içi ve dışı fotoğraf çekimleri.</li>
-      <li><strong>Girişimcilik Kulübü:</strong> Start-up tanıtımları ve atölyeler.</li>
-      <li><strong>Kitap Kulübü:</strong> Kitap okuma grupları ve tartışmalar.</li>
-      <li><strong>Doğa Sporları Kulübü:</strong> Kamp, yürüyüş ve tırmanış etkinlikleri.</li>
-      <li><strong>Satranç Kulübü:</strong> Turnuvalar ve strateji çalışmaları.</li>
-      <li><strong>Psikoloji Kulübü:</strong> Atölyeler ve bilinç seminerleri.</li>
-      <li><strong>Siyaset Kulübü:</strong> Güncel politik tartışmalar ve konferanslar.</li>
-      <li><strong>Dil Kulübü:</strong> İngilizce konuşma kulübü ve yabancı dil çalışmaları.</li>
-      <li><strong>Moda Kulübü:</strong> Defile organizasyonları ve tasarım çalışmaları.</li>
-      <li><strong>İnovasyon Kulübü:</strong> Yeni fikir geliştirme maratonları (Hackathon).</li>
-      <li><strong>Sağlık Kulübü:</strong> Sağlıklı yaşam seminerleri ve kan bağışı kampanyaları.</li>
-      <li><strong>Sosyal Sorumluluk Kulübü:</strong> Gönüllülük projeleri ve yardım kampanyaları.</li>
-      <li><strong>Uluslararası Öğrenci Kulübü:</strong> Kültür geceleri ve dil değişimi programları.</li>
-      <li><strong>Ekonomi Kulübü:</strong> Finansal analizler ve piyasa çalışmaları.</li>
-      <li><strong>Mimarlık Kulübü:</strong> Atölyeler, çizim yarışmaları ve maket sergileri.</li>
-    </ul>
+    <h2 style="text-align:center;">Kulüp Listesi</h2>
+    <div class="kulup-grid">
+      <div class="kulup-kart">
+        <h3>Bilişim Kulübü</h3>
+        <p>Yazılım, web geliştirme ve yapay zekâ çalışmaları.</p>
+      </div>
+      <div class="kulup-kart">
+        <h3>Tarih Kulübü</h3>
+        <p>Kültürel geziler ve tarih üzerine seminerler.</p>
+      </div>
+      <div class="kulup-kart">
+        <h3>Müzik Kulübü</h3>
+        <p>Konserler, prova çalışmaları ve grup müzik etkinlikleri.</p>
+      </div>
+      <div class="kulup-kart">
+        <h3>Tiyatro Kulübü</h3>
+        <p>Oyun hazırlıkları ve sahne performansları.</p>
+      </div>
+      <div class="kulup-kart">
+        <h3>Sinema Kulübü</h3>
+        <p>Film gösterimleri ve yönetmen analizleri.</p>
+      </div>
+      <div class="kulup-kart">
+        <h3>Fotoğrafçılık Kulübü</h3>
+        <p>Kampüs içi ve dışı fotoğraf çekimleri.</p>
+      </div>
+      <div class="kulup-kart">
+        <h3>Girişimcilik Kulübü</h3>
+        <p>Start-up tanıtımları ve atölyeler.</p>
+      </div>
+      <div class="kulup-kart">
+        <h3>Kitap Kulübü</h3>
+        <p>Kitap okuma grupları ve tartışmalar.</p>
+      </div>
+      <div class="kulup-kart">
+        <h3>Doğa Sporları Kulübü</h3>
+        <p>Kamp, yürüyüş ve tırmanış etkinlikleri.</p>
+      </div>
+      <div class="kulup-kart">
+        <h3>Satranç Kulübü</h3>
+        <p>Turnuvalar ve strateji çalışmaları.</p>
+      </div>
+      <div class="kulup-kart">
+        <h3>Psikoloji Kulübü</h3>
+        <p>Atölyeler ve bilinç seminerleri.</p>
+      </div>
+      <div class="kulup-kart">
+        <h3>Siyaset Kulübü</h3>
+        <p>Güncel politik tartışmalar ve konferanslar.</p>
+      </div>
+      <div class="kulup-kart">
+        <h3>Dil Kulübü</h3>
+        <p>İngilizce konuşma kulübü ve yabancı dil çalışmaları.</p>
+      </div>
+      <div class="kulup-kart">
+        <h3>Moda Kulübü</h3>
+        <p>Defile organizasyonları ve tasarım çalışmaları.</p>
+      </div>
+      <div class="kulup-kart">
+        <h3>İnovasyon Kulübü</h3>
+        <p>Yeni fikir geliştirme maratonları (Hackathon).</p>
+      </div>
+      <div class="kulup-kart">
+        <h3>Sağlık Kulübü</h3>
+        <p>Sağlıklı yaşam seminerleri ve kan bağışı kampanyaları.</p>
+      </div>
+      <div class="kulup-kart">
+        <h3>Sosyal Sorumluluk Kulübü</h3>
+        <p>Gönüllülük projeleri ve yardım kampanyaları.</p>
+      </div>
+      <div class="kulup-kart">
+        <h3>Uluslararası Öğrenci Kulübü</h3>
+        <p>Kültür geceleri ve dil değişimi programları.</p>
+      </div>
+      <div class="kulup-kart">
+        <h3>Ekonomi Kulübü</h3>
+        <p>Finansal analizler ve piyasa çalışmaları.</p>
+      </div>
+      <div class="kulup-kart">
+        <h3>Mimarlık Kulübü</h3>
+        <p>Atölyeler, çizim yarışmaları ve maket sergileri.</p>
+      </div>
+    </div>
   </section>
 </body>
 </html>
+

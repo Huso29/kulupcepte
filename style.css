@@ -1,247 +1,206 @@
-/* Genel Gövde Ayarları */
+/* GENEL GÖVDE */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Başlık */
-  h1 {
-    color: #0055aa;
-    font-size: 36px;
-    margin: 0;
-    padding: 10px;
-  }
-  
-  h2 {
-    color: #0055aa;
-    font-size: 28px;
-    margin-top: 30px;
-  }
-  
-  p {
-    font-size: 18px;
-  }
-  
-  /* Üst Menü (Header) */
-  header {
-    background-color: #0055aa;
-    color: white;
-    padding: 20px 10px;
-  }
-  
-  nav ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 15px;
-  }
-  
-  nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 16px;
-  }
-  
-  nav ul li a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Giriş Bölümü (index.html) */
-  .giris {
-    margin-top: 50px;
-  }
-  
-  /* Duyurular ve Etkinlikler Kartları */
-  .duyuru-kutu,
-  .etkinlik-kart {
-    background-color: #f1f1f1;
-    border-left: 5px solid #0055aa;
-    padding: 15px;
-    margin: 20px auto;
-    max-width: 700px;
-    border-radius: 5px;
-    text-align: left;
-  }
-  
-  /* Kulüpler Listesi */
-  .kulup-listesi ul {
-    list-style-type: disc;
-    text-align: left;
-    max-width: 700px;
-    margin: 30px auto;
-    padding-left: 30px;
-  }
-  
-  .kulup-listesi h2 {
-    color: #0055aa;
-  }
-  
-  .kulup-listesi li {
-    margin-bottom: 12px;
-  }
-  
-  /* Galeri Sayfası */
-  section img {
-    margin: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.2s ease;
-  }
-  
-  section img:hover {
-    transform: scale(1.05);
-  }/* Başvuru Formu */
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* BAŞLIKLAR */
+h1, h2 {
+  color: #0055aa;
+  animation: fadeIn 1s ease-in-out;
+}
+
+h1 {
+  font-size: 36px;
+  margin: 0;
+  padding: 10px;
+}
+
+h2 {
+  font-size: 28px;
+  margin-top: 30px;
+}
+
+p {
+  font-size: 18px;
+}
+
+/* NAVBAR */
+header {
+  background-color: #0055aa;
+  color: white;
+  padding: 20px 10px;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* GİRİŞ BÖLÜMÜ */
+.giris {
+  margin-top: 50px;
+}
+
+/* DUYURU & ETKİNLİK KARTLARI */
+.duyuru-kutu,
+.etkinlik-kart {
+  background-color: #f1f1f1;
+  border-left: 5px solid #0055aa;
+  padding: 15px;
+  margin: 20px auto;
+  max-width: 700px;
+  border-radius: 5px;
+  text-align: left;
+  transition: transform 0.3s ease;
+}
+
+.duyuru-kutu:hover,
+.etkinlik-kart:hover {
+  transform: scale(1.01);
+}
+
+/* KULÜPLER LİSTESİ */
+.kulup-listesi ul {
+  list-style-type: disc;
+  text-align: left;
+  max-width: 700px;
+  margin: 30px auto;
+  padding-left: 30px;
+}
+
+.kulup-listesi h2 {
+  color: #0055aa;
+}
+
+.kulup-listesi li {
+  margin-bottom: 12px;
+}
+
+/* FORM STİLLERİ */
 .form-bolumu {
-    margin-top: 40px;
-  }
-  
-  form input,
-  form select,
-  form textarea {
-    padding: 10px;
-    width: 300px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-  }
-  
-  form button {
-    background-color: #0055aa;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  form button:hover {
-    background-color: #003f88;
-  }
-  
-  /* Genel Tasarım */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-  }
-  
-  header {
-    background-color: #0055aa;
-    color: white;
-    padding: 20px;
-  }
-  
-  nav ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 15px;
-  }
-  
-  nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  nav ul li a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Mobil için özel stil */
-  @media (max-width: 768px) {
-    .form-bolumu form {
-      width: 90%;
-    }
-  
-    nav ul {
-      flex-direction: column;
-      gap: 15px;
-    }
-  
-    header {
-      text-align: center;
-    }
-  }
-/* Slayt Stilleri */
-.slider {
-    position: relative;
-    width: 100%;
-    height: 300px;
-    overflow: hidden;
-  }
-  
-  .slides {
-    display: flex;
-    width: 300%;
-    animation: slide 15s infinite;
-  }
-  
-  .slide {
-    width: 100%;
-    transition: transform 0.5s ease;
-  }
-  
-  .slide img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  /* Slayt Animasyonu */
-  @keyframes slide {
-    0% {
-      transform: translateX(0);
-    }
-    33% {
-      transform: translateX(-100%);
-    }
-    66% {
-      transform: translateX(-200%);
-    }
-    100% {
-      transform: translateX(0);
-    }
-  }
-/* Buton Hover Efekti */
+  margin-top: 40px;
+}
+
+form input,
+form select,
+form textarea {
+  padding: 10px;
+  width: 300px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
 form button {
-    background-color: #0055aa;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+  background-color: #0055aa;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+form button:hover {
+  background-color: #003f88;
+  transform: scale(1.05);
+}
+
+form button:active {
+  transform: scale(0.95);
+}
+
+/* GALERİ */
+section img {
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+section img:hover {
+  transform: scale(1.05);
+}
+
+/* SLAYT */
+.slider {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  width: 300%;
+  animation: slide 15s infinite;
+}
+
+.slide {
+  width: 100%;
+  transition: transform 0.5s ease;
+}
+
+.slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes slide {
+  0%   { transform: translateX(0); }
+  33%  { transform: translateX(-100%); }
+  66%  { transform: translateX(-200%); }
+  100% { transform: translateX(0); }
+}
+
+/* ANİMASYONLAR */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* MOBİL UYUMLULUK */
+@media (max-width: 768px) {
+  .form-bolumu form {
+    width: 90%;
   }
-  
-  form button:hover {
-    background-color: #003f88;
-    transform: scale(1.05);  /* Buton biraz büyür */
+
+  nav ul {
+    flex-direction: column;
+    gap: 15px;
   }
-  
-  /* Başlık Animasyonu */
-  h1, h2 {
-    animation: fadeIn 1s ease-in-out;
+
+  header {
+    text-align: center;
   }
-  
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
+
+  .duyuru-kutu,
+  .etkinlik-kart,
+  .kulup-kart,
+  .galeri-kart {
+    max-width: 90%;
   }
+}
+
       
