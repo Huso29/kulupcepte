@@ -2,52 +2,82 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <title>Giriş</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giriş - Kulüp Cepte</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    .giris-kutu {
-      background-color: #ffffff;
-      max-width: 400px;
-      margin: 100px auto;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #0055aa, #77aadd);
+      color: white;
     }
 
-    .giris-kutu h2 {
+    .giris-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .giris-kutu {
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 40px;
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+    }
+
+    .giris-kutu h1 {
+      font-size: 32px;
       margin-bottom: 20px;
+      color: #fff;
     }
 
     .giris-kutu p {
       font-size: 16px;
-      color: #666;
+      color: #e0e0e0;
+      margin-bottom: 30px;
     }
 
     .giris-kutu a {
       display: inline-block;
-      margin-top: 20px;
-      background-color: #0055aa;
-      color: white;
-      padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 5px;
+      background-color: #ffffff;
+      color: #0055aa;
       font-weight: bold;
+      padding: 12px 24px;
+      margin: 10px;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
     }
 
     .giris-kutu a:hover {
-      background-color: #003f88;
+      background-color: #e0e0e0;
+      transform: scale(1.05);
+    }
+
+    .logo {
+      max-width: 100px;
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
-
-  <div class="giris-kutu">
-    <h2>Hoş Geldiniz</h2>
-    <p>Kulüp Cepte platformuna giriş yapmak için aşağıdan bir panel seçin.</p>
-    
-    <a href="ogrenci_panel.html">Öğrenci Paneli</a>
-    <a href="kulup_panel.html" style="margin-left: 10px;">Kulüp Paneli</a>
+  <div class="giris-container">
+    <div class="giris-kutu">
+      <img src="img/logo.png" alt="Kulüp Cepte" class="logo" />
+      <h1>Kulüp Cepte</h1>
+      <p>Üniversite kulüplerini tek çatı altında toplayan dijital platforma hoş geldiniz.</p>
+      <a href="ogrenci_panel.html">👩‍🎓  Öğrenci Girişi</a>
+      <a href="kulup_panel.html">🎓  Kulüp Yönetimi</a>
+    </div>
   </div>
-
 </body>
 </html>
+
