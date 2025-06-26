@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Etkinlik Planla - Kulüp Cepte</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .form-container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #0055aa;
+      margin-bottom: 20px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #0055aa;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #003f88;
+    }
+
+    #basariliMesaj {
+      color: green;
+      display: none;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Yeni Etkinlik Planla</h2>
+    <form id="etkinlikFormu">
+      <input type="text" name="ad" placeholder="Etkinlik Adı" required>
+      <input type="datetime-local" name="tarih" required>
+      <textarea name="aciklama" rows="4" placeholder="Etkinlik açıklaması..." required></textarea>
+      <button type="submit">Etkinliği Kaydet</button>
+    </form>
+    <p id="basariliMesaj">✅ Etkinlik başarıyla eklendi!</p>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA0ixKTH_hQnNbGxzyatvkueHtZ0tCyCYA",
+      authDomain: "kulupcepte-848e1.firebaseapp.com",
+      projectId: "kulupcepte-848e1",
+      storageBucket: "kulupcepte-848e1.appspot.com",
+      messagingSenderId: "744362162117",
+      appId: "1:744362162117:web:d98790a856779c42c1bdac"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const form = document.getElementById("etkinlikFormu");
+    const mesaj = document.getElementById("basariliMesaj");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const ad = form.ad.value;
+      const tarih = form.tarih.value;
+      const aciklama = form.aciklama.value;
+
+      try {
+        await addDoc(collection(db, "etkinlikler"), {
+          ad,
+          tarih,
+          aciklama
+        });
+        mesaj.style.display = "block";
+        form.reset();
+      } catch (error) {
+        alert("Hata oluştu: " + error.message);
+      }
+    });
+  </script>
+
+</body>
+</html>
