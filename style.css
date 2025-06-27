@@ -1,3 +1,8 @@
+/* KÖK STİL AYARI */
+* {
+  box-sizing: border-box; /* Kenar/padding içeriği taşırmasın */
+}
+
 /* GENEL GÖVDE */
 body {
   font-family: Arial, sans-serif;
@@ -34,6 +39,9 @@ header {
   background-color: #0055aa;
   color: white;
   padding: 20px 10px;
+  position: sticky; /* Yukarıda sabit dursun */
+  top: 0;
+  z-index: 1000;
 }
 
 nav ul {
@@ -105,7 +113,8 @@ form input,
 form select,
 form textarea {
   padding: 10px;
-  width: 300px;
+  width: 100%;
+  max-width: 400px;
   border-radius: 5px;
   border: 1px solid #ccc;
   margin-bottom: 10px;
@@ -128,6 +137,22 @@ form button:hover {
 
 form button:active {
   transform: scale(0.95);
+}
+
+/* ORTAK BUTON CLASS'I */
+.btn {
+  background-color: #0055aa;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #003f88;
+  transform: scale(1.05);
 }
 
 /* GALERİ */
@@ -163,10 +188,12 @@ section img:hover {
 
 .slide img {
   width: 100%;
-  height: auto;
+  height: 300px;
+  object-fit: cover;
   display: block;
 }
 
+/* ANİMASYONLAR */
 @keyframes slide {
   0%   { transform: translateX(0); }
   33%  { transform: translateX(-100%); }
@@ -174,7 +201,6 @@ section img:hover {
   100% { transform: translateX(0); }
 }
 
-/* ANİMASYONLAR */
 @keyframes fadeIn {
   0% { opacity: 0; }
   100% { opacity: 1; }
@@ -201,17 +227,19 @@ section img:hover {
   .galeri-kart {
     max-width: 90%;
   }
-}/* KULÜP SAYFALARI GÖRSEL BOYUT AYARI */
+}
+
+/* KULÜP SAYFALARI GÖRSEL BOYUT AYARI */
 .kulup-sayfasi img {
   max-width: 100%;
-  max-height: 350px;
-  height: auto;
+  height: 250px;
+  object-fit: cover;
   display: block;
   margin: 0 auto 20px auto;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  object-fit: cover;
 }
+
 /* GENEL IMG STİLİ */
 img {
   max-width: 100%;
@@ -221,6 +249,14 @@ img {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
+
+/* GALERİ GÖRSELLERİNE KAPLAMA */
+.galeri-kart img {
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
 
 
       

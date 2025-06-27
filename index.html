@@ -2,15 +2,15 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kulüp Cepte</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- Firebase Auth için gerekli scriptler -->
   <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-auth-compat.js"></script>
 </head>
 <body>
 
-  <!-- Slayt Gösterisi -->
+  <!-- Slayt -->
   <section class="slider">
     <div class="slides">
       <div class="slide fade"><img src="img/kampus1.jpg" alt="Kampüs 1" /></div>
@@ -19,26 +19,31 @@
     </div>
   </section>
 
+  <!-- Menü -->
   <header>
     <h1>Kulüp Cepte</h1>
     <nav>
       <ul>
+        <li><a href="index.html">Anasayfa</a></li>
         <li><a href="duyurular.html">Duyurular</a></li>
         <li><a href="etkinlikler.html">Etkinlikler</a></li>
         <li><a href="galeri.html">Galeri</a></li>
         <li><a href="kulupler.html">Kulüpler</a></li>
+        <li><a href="giris.html">Giriş</a></li>
+        <li><a href="ogrenci_panel.html">Öğrenci Paneli</a></li>
+        <li><a href="kulup_panel.html">Kulüp Paneli</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Giriş Butonu -->
+  <!-- Giriş Yönlendirmesi -->
   <section class="giris">
     <h2>Üniversite Kulüplerine Özel Platform</h2>
-    <p>Tüm kulüp duyuruları, etkinlikler ve iletişim tek bir platformda birleşti!</p>
-    <button onclick="signIn()">Google ile Giriş Yap</button>
+    <p>Tüm kulüp duyuruları, etkinlikler ve başvurular tek çatı altında!</p>
+    <a href="giris.html" class="giris-buton">Giriş Yap</a>
   </section>
 
-  <!-- Kulüp Başvuru Formu -->
+  <!-- Başvuru Formu -->
   <section class="form-bolumu">
     <h2>Kulüp Başvuru Formu</h2>
     <form id="kulupFormu">
@@ -56,45 +61,19 @@
     <p id="onayMesaji" style="display:none; color: green;">Başvurunuz alındı!</p>
   </section>
 
-  <!-- Firebase Login + Firestore -->
-  <script>
+  <!-- Firebase Konfig -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
     const firebaseConfig = {
       apiKey: "AIzaSyA0ixKTH_hQnNbGxzyatvkueHtZ0tCyCYA",
       authDomain: "kulupcepte-848e1.firebaseapp.com",
       projectId: "kulupcepte-848e1",
-      storageBucket: "kulupcepte-848e1.firebasestorage.app",
+      storageBucket: "kulupcepte-848e1.appspot.com",
       messagingSenderId: "744362162117",
       appId: "1:744362162117:web:d98790a856779c42c1bdac"
     };
-
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-
-    function signIn() {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      auth.signInWithPopup(provider).then(result => {
-        const email = result.user.email;
-        const yoneticiler = ["kulupx@gmail.com", "kulupy@gmail.com"];
-
-        if (yoneticiler.includes(email)) {
-          window.location.href = "kulup_panel.html";
-        } else if (email.endsWith("@edu.tr")) {
-          window.location.href = "ogrenci_panel.html";
-        } else {
-          alert("Sadece edu.tr uzantılı mail adresi veya tanımlı kulüp yöneticileri giriş yapabilir.");
-          auth.signOut();
-        }
-      }).catch(error => {
-        console.error(error);
-        alert("Giriş başarısız oldu.");
-      });
-    }
-  </script>
-
-  <!-- Firestore form gönderimi (modüler) -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
@@ -136,9 +115,26 @@
       66% { transform: translateX(-200%); }
       100% { transform: translateX(0); }
     }
+
+    .giris-buton {
+      display: inline-block;
+      background-color: #0055aa;
+      color: white;
+      font-weight: bold;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .giris-buton:hover {
+      background-color: #003f88;
+      transform: scale(1.05);
+    }
   </style>
 </body>
 </html>
+
 
 
 

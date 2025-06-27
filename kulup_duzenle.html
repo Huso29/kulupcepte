@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Kulüp Sayfasını Düzenle</title>
+  <title>Kulüp Sayfasını Düzenle - Kulüp Cepte</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     .duzenle-container {
@@ -47,20 +47,50 @@
       color: green;
       display: none;
       margin-top: 15px;
+      font-weight: bold;
+    }
+
+    .geri-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .geri-link a {
+      color: #0055aa;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .geri-link a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
+  <header>
+    <h1>Kulüp Sayfasını Düzenle</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Anasayfa</a></li>
+        <li><a href="kulup_panel.html">Kulüp Paneli</a></li>
+      </ul>
+    </nav>
+  </header>
+
   <div class="duzenle-container">
-    <h2>Kulüp Sayfasını Düzenle</h2>
+    <h2>Kulüp Bilgilerini Güncelle</h2>
     <form id="kulupForm">
       <input type="text" name="ad" placeholder="Kulüp Adı" required>
       <textarea name="aciklama" rows="4" placeholder="Kulüp açıklaması..." required></textarea>
-      <input type="text" name="gorsel" placeholder="Görsel URL" required>
+      <input type="text" name="gorsel" placeholder="Görsel URL (img klasöründen: örn. img/bilisim.jpg)" required>
       <button type="submit">Kaydet</button>
     </form>
     <p id="mesaj">✅ Kulüp bilgileri güncellendi!</p>
+  </div>
+
+  <div class="geri-link">
+    <a href="kulup_panel.html">← Kulüp Paneline Dön</a>
   </div>
 
   <!-- Firebase SDK -->
@@ -103,6 +133,7 @@
         });
 
         mesaj.style.display = "block";
+        setTimeout(() => mesaj.style.display = "none", 4000);
         form.reset();
       } catch (error) {
         alert("Hata oluştu: " + error.message);
@@ -112,3 +143,4 @@
 
 </body>
 </html>
+

@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <title>Öğrenci Paneli - Kulüp Cepte</title>
+  <title>Öğrenci Paneli | Kulüp Cepte</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     .panel-container {
@@ -23,7 +23,8 @@
       margin-bottom: 30px;
     }
 
-    .panel-buttons a {
+    .panel-buttons a,
+    .panel-buttons button {
       display: inline-block;
       background-color: #0055aa;
       color: white;
@@ -31,14 +32,20 @@
       margin: 10px;
       text-decoration: none;
       border-radius: 8px;
+      border: none;
+      cursor: pointer;
       transition: background-color 0.3s ease, transform 0.3s ease;
     }
 
-    .panel-buttons a:hover {
+    .panel-buttons a:hover,
+    .panel-buttons button:hover {
       background-color: #003f88;
       transform: scale(1.05);
     }
   </style>
+  <!-- Firebase için script -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-auth-compat.js"></script>
 </head>
 <body>
   <header>
@@ -62,8 +69,32 @@
       <a href="etkinlikler.html">📅 Etkinlik Takvimi</a>
       <a href="duyurular.html">📣 Duyurular</a>
       <a href="index.html#kulupFormu">📝 Başvuru Yap</a>
+      <button onclick="signOut()">🚪 Çıkış Yap</button>
     </div>
   </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyA0ixKTH_hQnNbGxzyatvkueHtZ0tCyCYA",
+      authDomain: "kulupcepte-848e1.firebaseapp.com",
+      projectId: "kulupcepte-848e1",
+      storageBucket: "kulupcepte-848e1.appspot.com",
+      messagingSenderId: "744362162117",
+      appId: "1:744362162117:web:d98790a856779c42c1bdac"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    function signOut() {
+      firebase.auth().signOut().then(() => {
+        window.location.href = "index.html";
+      }).catch((error) => {
+        alert("Çıkış yapılırken hata oluştu.");
+        console.error(error);
+      });
+    }
+  </script>
 </body>
 </html>
+
 

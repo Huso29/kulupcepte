@@ -31,14 +31,42 @@
     .basvuru-kutu p {
       margin: 4px 0;
     }
+
+    .geri-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .geri-link a {
+      color: #0055aa;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .geri-link a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
 
+  <header>
+    <h1>Kulüp Başvuruları</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Anasayfa</a></li>
+        <li><a href="kulup_panel.html">Kulüp Paneli</a></li>
+      </ul>
+    </nav>
+  </header>
+
   <div class="basvuru-container">
-    <h2>Kulüp Başvuruları</h2>
+    <h2>Gelen Başvurular</h2>
     <div id="basvuruListesi">
       <p>Yükleniyor...</p>
+    </div>
+    <div class="geri-link">
+      <a href="kulup_panel.html">← Kulüp Paneline Dön</a>
     </div>
   </div>
 
@@ -58,27 +86,30 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-
     const liste = document.getElementById("basvuruListesi");
 
     async function getirBasvurular() {
       try {
         const querySnapshot = await getDocs(collection(db, "katilimlar"));
-        liste.innerHTML = ""; // içeriği temizle
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          const kutu = document.createElement("div");
-          kutu.classList.add("basvuru-kutu");
-          kutu.innerHTML = `
-            <p><strong>Ad Soyad:</strong> ${data.adSoyad}</p>
-            <p><strong>Kulüp:</strong> ${data.kulupSecimi}</p>
-            <p><strong>Mesaj:</strong> ${data.mesaj}</p>
-          `;
-          liste.appendChild(kutu);
-        });
+        liste.innerHTML = "";
 
         if (querySnapshot.empty) {
-          liste.innerHTML = "<p>Henüz başvuru yok.</p>";
+          liste.innerHTML = "<p style='text-align:center;'>Henüz başvuru yok.</p>";
+        } else {
+          querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const tarih = data.tarih?.toDate().toLocaleString("tr-TR") || "Tarih yok";
+
+            const kutu = document.createElement("div");
+            kutu.classList.add("basvuru-kutu");
+            kutu.innerHTML = `
+              <p><strong>Ad Soyad:</strong> ${data.adSoyad}</p>
+              <p><strong>Kulüp:</strong> ${data.kulupSecimi}</p>
+              <p><strong>Mesaj:</strong> ${data.mesaj}</p>
+              <p><strong>Başvuru Tarihi:</strong> ${tarih}</p>
+            `;
+            liste.appendChild(kutu);
+          });
         }
       } catch (err) {
         liste.innerHTML = `<p style="color:red;">Hata oluştu: ${err.message}</p>`;
@@ -90,3 +121,4 @@
 
 </body>
 </html>
+

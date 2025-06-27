@@ -110,10 +110,11 @@
   <script>
     document.getElementById("epostaForm").addEventListener("submit", function(e) {
       e.preventDefault();
-      const eposta = document.getElementById("eposta").value.trim();
+      const eposta = document.getElementById("eposta").value.trim().toLowerCase();
       const hata = document.getElementById("hata");
 
       if (eposta.endsWith("@ogr.edu.tr")) {
+        hata.style.display = "none";
         window.location.href = "ogrenci_panel.html";
       } else {
         hata.style.display = "block";
@@ -122,5 +123,6 @@
   </script>
 </body>
 </html>
+
 
 
